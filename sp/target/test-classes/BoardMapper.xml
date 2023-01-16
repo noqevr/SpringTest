@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.BoardMapper">
+	<insert id ="insert">
+		<![CDATA[INSERT INTO board(num , mbrid, title, content, reg_date, readcount, ip, re_ref, re_lev, re_seq)VALUES(#{num}, #{mbrid}, #{title}, #{contet}, #{regDate}, #{readcount}, #{ip}, #{reRef}, #{reLev}, #{reSeq})]]>
+	</insert>
+	<select id ="getTotalCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)FROM board]]>
+		</select>
+	<select id ="nextBoardNum" resultType="int">
+		<![CDATA[
+			SELECT NVL(MAX(num),0)+1 AS bnum FROM board]]>
+		</select>
+	<update id="updateReadcount">
+		<![CDATA[
+		UPDATE board
+		set readcout = readcoutn +1
+		WHERE num = #{num};
+	]]>
+	
+	</update>	
+		
+	<!-- boardVO -->
+	<select id ="getBoard" resultType="boardVO">
+		<![CDATA[
+		SELECT * FROM board WHERE num =#{num};
+		]]>
+	</select>
+	
+	<select id ="getBoard" resultType="boardVO">
+		<![CDATA[
+			SELECT * FROM board ORDER BY num DESC
+			
+		]]>
+	
+	</select>
+	
+	<delete id ="deleteBoard">
+		<![CDATA[
+			SELECT * FROM board
+			WHERE num = #{num}
+		]]>
+	
+	</delete>
+		
+	
+	<delete id ="deleteAll">
+	<![CDATA[
+	DELETE FROM board
+	]]>
+	</delete>
+		
+		
+</mapper>
