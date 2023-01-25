@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lec.board.dao.BoardMapper">
+
+	
+	
+	<select id ="selectAll" resultType="Board">
+		select * from board order by wr_uid desc
+		</select>
+		
+	<select id ="selectOne" parameterType="string" resultType="Board">
+		select * from board where wr_uid = #{wr_uid}
+		</select>
+		
+		
+	<insert id="insertOne" parameterType="Board">
+		insert into board (wr_uid, subject, content, name) values (board_seq.nextval, #{subject}, #{content}, #{name})
+	</insert>
+		
+	<update id="updateOne" parameterType="Board">
+	
+		update board set subject = #{subject},
+		content = #{contet}
+		where wr_uid = #{wr_uid}
+	
+	</update>	
+	<update id="updateViewcnt" parameterType="stirng">
+			update board set viewcnt = viewcnt +1
+			where wr_uid = #{wr_uid}
+	</update>
+		
+		<delete id="deleteOne" parameterType="string">
+			delete from board where wr_uid = #{wr_uid}
+		</delete>
+</mapper>
